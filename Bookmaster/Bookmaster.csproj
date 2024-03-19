@@ -100,5 +100,11 @@
     <Folder Include="Resources\Images\" />
     <Folder Include="Styles\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="booklogo.jpg" />
+    <Resource Include="logo.png" />
+    <Resource Include="search.png" />
+    <Resource Include="warning.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
