@@ -3,7 +3,6 @@
     <Style TargetType="TextBox">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontFamily" Value="Tahoma"/>
-        <Setter Property="Text" Value="Book"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="BorderBrush" Value="Black"/>

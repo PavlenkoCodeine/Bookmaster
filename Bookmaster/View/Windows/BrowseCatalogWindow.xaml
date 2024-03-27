@@ -35,14 +35,14 @@
         </Menu>
 <!--Поиск-->
         <Grid Grid.Row="1"
-              Grid.RowSpan="3">
+              Grid.RowSpan="3" Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="10" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="10" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="10" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
@@ -54,7 +54,8 @@
             
             <Image Grid.ColumnSpan="3" Source="/logo.png" />
 
-            <TextBlock Grid.Row="2"
+            <TextBlock  
+                       Grid.Row="2"
                        Text="Title"
                        HorizontalAlignment="Center"/>
             
@@ -68,7 +69,42 @@
 
             <Button Grid.Row="6" Grid.Column="2" Content="Search"/> 
         </Grid>
-        
+        <!--Результаты поиска-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <ListView>
+                
+            </ListView>
+
+            <Grid Grid.Row="1" Margin="10 3" >
+                <Grid.RowDefinitions>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Page" Grid.Column="0" />
+                <Button Content="&lt;" Grid.Column="2"/>
+                <TextBox Text="1" Grid.Column="4" HorizontalContentAlignment="Center"/>
+                <Button Content="&gt;" Grid.Column="6"/>
+                <TextBlock Text="of 4" Grid.Column="8"/>
+                <TextBlock Text="153 Books found" Grid.Column="10"/>
+            </Grid>
+            
+        </Grid>
         
     </Grid>
 </Window>
