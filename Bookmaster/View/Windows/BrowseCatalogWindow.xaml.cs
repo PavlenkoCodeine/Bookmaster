@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bookmaster.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,14 @@ namespace Bookmaster.View.Windows
         public BrowseCatalogWindow()
         {
             InitializeComponent();
+            BookAuthorLv.ItemsSource = App.context.BookAuthor.ToList();
+            CountOfBooksTbl.DataContext = App.context.Book.ToList();
+        }
+
+        private void BookAuthorLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedBookGrid.DataContext = BookAuthorLv.SelectedItem as BookAuthor;
+
         }
     }
 }

@@ -156,19 +156,19 @@
     <Resource Include="warning.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Models\BookmasterModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BookmasterModel.Context.cs</LastGenOutput>
       <DependentUpon>BookmasterModel.edmx</DependentUpon>
+      <LastGenOutput>BookmasterModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\BookmasterModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BookmasterModel.edmx</DependentUpon>
       <LastGenOutput>BookmasterModel.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

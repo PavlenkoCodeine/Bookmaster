@@ -8,5 +8,7 @@
         <!--Set+TAB-->
         <Setter Property="FontFamily" Value="Tahoma"/>
         <Setter Property="VerticalAlignment" Value="Center" />
+        <!--  TextWrapping - перенос текста  -->
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
 </ResourceDictionary>

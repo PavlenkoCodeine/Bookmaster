@@ -76,8 +76,16 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <ListView>
-                
+            <ListView Name="BookAuthorLv"
+                      SelectionChanged="BookAuthorLv_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Title"
+                                        DisplayMemberBinding="{Binding Book.Title}"/>
+                        <GridViewColumn Header="Authors"
+                                        DisplayMemberBinding="{Binding Author.Fullname}"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
 
             <Grid Grid.Row="1" Margin="10 3" >
@@ -101,9 +109,54 @@
                 <TextBox Text="1" Grid.Column="4" HorizontalContentAlignment="Center"/>
                 <Button Content="&gt;" Grid.Column="6"/>
                 <TextBlock Text="of 4" Grid.Column="8"/>
-                <TextBlock Text="153 Books found" Grid.Column="10"/>
+                <TextBlock Name="CountOfBooksTbl" Grid.Column="10" Text="{Binding Count, StringFormat={}{0} Books found}"/>
             </Grid>
+        </Grid>
+        
+        <!--Информация о книге-->
+        <Grid Name="SelectedBookGrid" Grid.Row="3" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
             
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="{Binding Book.Title}"
+                           FontSize="30"/>
+                
+                <TextBlock Grid.Row="2">
+                    <Hyperlink>
+                        by Byron Button
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Grid.Row="4" Text="{Binding Book.FirstPublishDate, StringFormat=dd.MM.yy}"
+                           FontSize="14"/>
+                
+                <TextBlock Grid.Row="6" Text="Description"
+                           FontSize="16"/>
+
+                <TextBlock Grid.Row="8" Text="Boaty McBoatface - learn more about the adventurous travels of the polar research vessel" 
+                           FontSize="14"/>
+                
+                
+
+            </Grid>
+
+            <Image Grid.Column="1" Source="/booklogo.jpg" />
         </Grid>
         
     </Grid>
