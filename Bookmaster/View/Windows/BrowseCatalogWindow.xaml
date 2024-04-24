@@ -17,23 +17,23 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="533" />
+            <ColumnDefinition Width="350" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        
+        <!--Меню-->
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="File">
-                <MenuItem Header="Login"/>
-                <MenuItem Header="Logout"/>
-                <MenuItem Header="Close"/>
+                <MenuItem Name="LoginMi" Header="Login" Click="LoginMi_Click"/>
+                <MenuItem Name="LogoutMi" Header="Logout" Visibility="Collapsed" Click="LogoutMi_Click"/>
+                <MenuItem Name= "ClosetMi" Header="Close"  Click="ClosetMi_Click"/>
             </MenuItem>
-            <MenuItem Header="Library">
-                <MenuItem Header="Manage Customers"/>
-                <MenuItem Header="Circulation"/>
-                <MenuItem Header="Reports"/>
+            <MenuItem Header="Library" Name="LibraryMi" Visibility="Collapsed" Click="LibraryMi_Click">
+                <MenuItem Header="Manage Customers" Name="ManageCustomersMi" Click="ManageCustomersMi_Click"/>
+                <MenuItem Header="Circulation" Name="CirculationMi" Click="CirculationMi_Click"/>
+                <MenuItem Header="Reports" Name="Reports" Click="Reports_Click"/>
             </MenuItem>
         </Menu>
-<!--Поиск-->
+        <!--Поиск-->
         <Grid Grid.Row="1"
               Grid.RowSpan="3" Margin="20">
             <Grid.RowDefinitions>
@@ -59,18 +59,19 @@
                        Text="Title"
                        HorizontalAlignment="Center"/>
             
-            <TextBox Grid.Row="2" Grid.Column="2"/>
+            <TextBox Grid.Row="2" Grid.Column="2" Name="TitleTb"/>
             
             <TextBlock Grid.Row="4"
                        Text="Author"
                        HorizontalAlignment="Center"/>
             
-            <TextBox Grid.Row="4" Grid.Column="2"/>
+            <TextBox Name="AuthorTb" Grid.Row="4" Grid.Column="2"/>
 
-            <Button Grid.Row="6" Grid.Column="2" Content="Search"/> 
+            <Button Name="SearcchBtn" Grid.Row="6" Grid.Column="2" Content="Search" Click="Button_Click"/> 
         </Grid>
+        
         <!--Результаты поиска-->
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="50" />
@@ -82,8 +83,21 @@
                     <GridView>
                         <GridViewColumn Header="Title"
                                         DisplayMemberBinding="{Binding Book.Title}"/>
-                        <GridViewColumn Header="Authors"
-                                        DisplayMemberBinding="{Binding Author.Fullname}"/>
+                        <GridViewColumn Header="Authors">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                <Binding Path="Author.Lastname"/>
+                                                <Binding Path="Author.Firstname"/>
+                                                <Binding Path="Author.Middlename"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -113,8 +127,11 @@
             </Grid>
         </Grid>
         
+        <!--Разделитель-->
+        <GridSplitter Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        
         <!--Информация о книге-->
-        <Grid Name="SelectedBookGrid" Grid.Row="3" Grid.Column="1" >
+        <Grid Name="SelectedBookGrid" Grid.Row="3" Grid.Column="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="300" />
@@ -138,25 +155,33 @@
                            FontSize="30"/>
                 
                 <TextBlock Grid.Row="2">
-                    <Hyperlink>
-                        by Byron Button
+                    <Hyperlink Name="AuthorHl" Click="AuthorHl_Click">
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1} {2}">
+                                    <Binding Path="Author.Lastname"/>
+                                    <Binding Path="Author.Firstname"/>
+                                    <Binding Path="Author.Middlename"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Hyperlink>
                 </TextBlock>
 
-                <TextBlock Grid.Row="4" Text="{Binding Book.FirstPublishDate, StringFormat=dd.MM.yy}"
+                <TextBlock Grid.Row="4" Text="{Binding Book.FirstPublishDate.Year, StringFormat=first published: {0}}"
                            FontSize="14"/>
                 
                 <TextBlock Grid.Row="6" Text="Description"
                            FontSize="16"/>
 
-                <TextBlock Grid.Row="8" Text="Boaty McBoatface - learn more about the adventurous travels of the polar research vessel" 
+                <TextBlock Grid.Row="8" Text="{Binding Book.Description}" 
                            FontSize="14"/>
                 
                 
 
             </Grid>
 
-            <Image Grid.Column="1" Source="/booklogo.jpg" />
+            <Image Grid.Column="1" Source="{Binding Book.Cover}" />
         </Grid>
         
     </Grid>

@@ -23,14 +23,6 @@ namespace Bookmaster.Models
         public string Lastname { get; set; }
         public string Firstname { get; set; }
         public string Middlename { get; set; }
-        public string Fullname
-        {
-            get
-            {
-                return $"{Lastname} {Firstname} {Middlename}";
-            }
-        }
-
         public string Bio { get; set; }
         public System.DateTime BirthDate { get; set; }
         public Nullable<System.DateTime> DeathDate { get; set; }
