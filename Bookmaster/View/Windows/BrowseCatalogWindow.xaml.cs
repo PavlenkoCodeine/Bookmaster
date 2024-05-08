@@ -39,19 +39,25 @@ namespace Bookmaster.View.Windows
         {
             // Открываем окно LoginWindow в режиме диалогового окна
             LoginWindow loginWindow = new LoginWindow();
-            loginWindow.ShowDialog();
-
-            LogoutMi.Visibility = Visibility.Visible;
-            LogoutMi.Visibility = Visibility.Collapsed;
-
-            LibraryMi.Visibility = Visibility.Visible;
+           if(loginWindow.ShowDialog() == true)
+            {
+                LoginMi.Visibility = Visibility.Collapsed;
+                 LibraryMi.Visibility = Visibility.Visible;
+                 LogoutMi.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LibraryMi.Visibility = Visibility.Collapsed;
+                LogoutMi.Visibility = Visibility.Collapsed;
+                LoginMi.Visibility = Visibility.Visible;
+            }
         }
 
         private void LogoutMi_Click(object sender, RoutedEventArgs e)
         {
             // пользователь выходит
-            LogoutMi.Visibility = Visibility.Collapsed; 
-            LogoutMi.Visibility = Visibility.Visible;
+            LogoutMi.Visibility = Visibility.Collapsed;
+            LoginMi.Visibility = Visibility.Visible;
             LibraryMi.Visibility = Visibility.Collapsed;
 
         }

@@ -9,7 +9,7 @@
         SizeToContent="Height"
         Width="400"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Height="500">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />

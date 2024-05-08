@@ -23,5 +23,26 @@ namespace Bookmaster.View.Windows
         {
             InitializeComponent();
         }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (LoginTb.Text == "administrator" && PasswordPb.Password == "admin123") // true
+            {
+                MessageBox.Show("Пользователь авторизовался");
+                DialogResult = true;
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден");
+                DialogResult = false;
+
+            }
+
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

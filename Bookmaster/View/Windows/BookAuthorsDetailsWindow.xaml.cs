@@ -49,9 +49,16 @@ namespace Bookmaster.View.Windows
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
+            try
+            {
             // Открываем браузер по абсолютной ссылке и "разрешаем открытие" веб-страницы
             Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
+            }
+            catch
+            {
+                MessageBox.Show("Невозможно открыть сайт.");
+            }
         }
     }
 }
