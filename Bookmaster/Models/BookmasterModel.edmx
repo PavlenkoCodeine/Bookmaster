@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Pavlenko.Daria.BookmasterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Pavlenko.Daria.BookmasterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="Id" />
@@ -37,6 +37,18 @@
           <Property Name="BookId" Type="int" Nullable="false" />
           <Property Name="AuthorId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <Association Name="FK_BookAuthor_Author">
           <End Role="Author" Type="Self.Author" Multiplicity="1" />
           <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
@@ -65,6 +77,7 @@
           <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookAuthor" EntityType="Self.BookAuthor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BookAuthor_Author" Association="Self.FK_BookAuthor_Author">
             <End Role="Author" EntitySet="Author" />
             <End Role="BookAuthor" EntitySet="BookAuthor" />
@@ -74,36 +87,49 @@
             <End Role="BookAuthor" EntitySet="BookAuthor" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pavlenko.Daria.BookmasterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BookmasterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Author" EntityType="Pavlenko.Daria.BookmasterModel.Author" />
+          <EntitySet Name="Book" EntityType="Pavlenko.Daria.BookmasterModel.Book" />
+          <EntitySet Name="BookAuthor" EntityType="Pavlenko.Daria.BookmasterModel.BookAuthor" />
+          <EntitySet Name="Customers" EntityType="Pavlenko.Daria.BookmasterModel.Customers" />
+          <AssociationSet Name="FK_BookAuthor_Author" Association="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="BookAuthor" EntitySet="BookAuthor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookAuthor_Book" Association="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookAuthor" EntitySet="BookAuthor" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Author">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Lastname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Firstname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="Middlename" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DeathDate" Type="DateTime" Precision="0" />
           <Property Name="Wikipedia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BookAuthor" Relationship="Self.FK_BookAuthor_Author" FromRole="Author" ToRole="BookAuthor" />
+          <NavigationProperty Name="BookAuthor" Relationship="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Author" FromRole="Author" ToRole="BookAuthor" />
         </EntityType>
         <EntityType Name="Book">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="Subtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstPublishDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cover" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BookAuthor" Relationship="Self.FK_BookAuthor_Book" FromRole="Book" ToRole="BookAuthor" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BookAuthor" Relationship="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Book" FromRole="Book" ToRole="BookAuthor" />
         </EntityType>
         <EntityType Name="BookAuthor">
           <Key>
@@ -112,12 +138,24 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="BookId" Type="Int32" Nullable="false" />
           <Property Name="AuthorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Author" Relationship="Self.FK_BookAuthor_Author" FromRole="BookAuthor" ToRole="Author" />
-          <NavigationProperty Name="Book" Relationship="Self.FK_BookAuthor_Book" FromRole="BookAuthor" ToRole="Book" />
+          <NavigationProperty Name="Author" Relationship="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Author" FromRole="BookAuthor" ToRole="Author" />
+          <NavigationProperty Name="Book" Relationship="Pavlenko.Daria.BookmasterModel.FK_BookAuthor_Book" FromRole="BookAuthor" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BookAuthor_Author">
-          <End Role="Author" Type="Self.Author" Multiplicity="1" />
-          <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
+          <End Type="Pavlenko.Daria.BookmasterModel.Author" Role="Author" Multiplicity="1" />
+          <End Type="Pavlenko.Daria.BookmasterModel.BookAuthor" Role="BookAuthor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Author">
               <PropertyRef Name="Id" />
@@ -128,8 +166,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BookAuthor_Book">
-          <End Role="Book" Type="Self.Book" Multiplicity="1" />
-          <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
+          <End Type="Pavlenko.Daria.BookmasterModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="Pavlenko.Daria.BookmasterModel.BookAuthor" Role="BookAuthor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Book">
               <PropertyRef Name="Id" />
@@ -139,19 +177,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BookmasterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Author" EntityType="Self.Author" />
-          <EntitySet Name="Book" EntityType="Self.Book" />
-          <EntitySet Name="BookAuthor" EntityType="Self.BookAuthor" />
-          <AssociationSet Name="FK_BookAuthor_Author" Association="Self.FK_BookAuthor_Author">
-            <End Role="Author" EntitySet="Author" />
-            <End Role="BookAuthor" EntitySet="BookAuthor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BookAuthor_Book" Association="Self.FK_BookAuthor_Book">
-            <End Role="Book" EntitySet="Book" />
-            <End Role="BookAuthor" EntitySet="BookAuthor" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -161,35 +186,48 @@
           <EntitySetMapping Name="Author">
             <EntityTypeMapping TypeName="Pavlenko.Daria.BookmasterModel.Author">
               <MappingFragment StoreEntitySet="Author">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
-                <ScalarProperty Name="Bio" ColumnName="Bio" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="DeathDate" ColumnName="DeathDate" />
                 <ScalarProperty Name="Wikipedia" ColumnName="Wikipedia" />
+                <ScalarProperty Name="DeathDate" ColumnName="DeathDate" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Book">
             <EntityTypeMapping TypeName="Pavlenko.Daria.BookmasterModel.Book">
               <MappingFragment StoreEntitySet="Book">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
-                <ScalarProperty Name="FirstPublishDate" ColumnName="FirstPublishDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Cover" ColumnName="Cover" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FirstPublishDate" ColumnName="FirstPublishDate" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BookAuthor">
             <EntityTypeMapping TypeName="Pavlenko.Daria.BookmasterModel.BookAuthor">
               <MappingFragment StoreEntitySet="BookAuthor">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="Pavlenko.Daria.BookmasterModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

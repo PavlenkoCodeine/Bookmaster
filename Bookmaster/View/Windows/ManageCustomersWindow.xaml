@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bookmaster.View.Windows"
         mc:Ignorable="d"
-        Title="ManageCustomersWindow" Height="450" Width="800">
+        Title="ManageCustomersWindow" MinHeight="720" MinWidth="1280"
+        Height="900" Width="1600"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid  Margin="30 80" ShowGridLines="true">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Customer ID" FontSize="30" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Left"/>
+            <TextBox  Name="CustomersIdTb" Grid.Row="2" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Stretch"/>
+            <TextBlock Text="Name" FontSize="30" Grid.Row="4" 
+                       HorizontalAlignment="Left"/>
+            <TextBox  Name="NameTb" Grid.Row="6" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Stretch"/>
+            <Button  Name="SearchBtn" Grid.Row="8" Grid.ColumnSpan="3"
+                     Click="SearchBtn_Click" Content="Search" />
+            <Button  Name="EditBtn" Grid.Row="10" 
+                     Content="Edit" Click="EditBtn_Click" />
+            <Button  Name="AddBtn" Grid.Row="10" Grid.Column="2"
+                     Content="Add" Click="AddBtn_Click" />
+        </Grid>
+        <ListView Grid.Column="1" Name="CustomersLv"
+                      SelectionChanged="CustomersLv_SelectionChanged" Margin="20" FontSize="16">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID"
+                                        DisplayMemberBinding="{Binding Id, StringFormat=C{0}}"/>
+                    <GridViewColumn Header="Name"
+                                    DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Address"
+                                    DisplayMemberBinding="{Binding Address}"/>
+                    <GridViewColumn Header="Zip"
+                                    DisplayMemberBinding="{Binding ZipCode}"/>
+                    <GridViewColumn Header="City"
+                                    DisplayMemberBinding="{Binding City}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

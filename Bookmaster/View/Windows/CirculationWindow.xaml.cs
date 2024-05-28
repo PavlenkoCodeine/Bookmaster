@@ -23,5 +23,30 @@ namespace Bookmaster.View.Windows
         {
             InitializeComponent();
         }
+
+        private void CirculationBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CurrentIssuesLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void RenewBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void IssueBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
